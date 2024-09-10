@@ -6,7 +6,8 @@ export default function SignIn() {
   const [csrfToken, setCsrfToken] = useState('')
   useEffect(() => {
     const initToken = async () => {
-      const response = await fetch('http://localhost:3000/api/auth/csrf')
+      const host = window.location.host
+      const response = await fetch(`http://${host}/api/auth/csrf`)
       const { csrfToken } = await response.json()
       setCsrfToken(csrfToken)
     }

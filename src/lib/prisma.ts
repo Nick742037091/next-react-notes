@@ -45,7 +45,11 @@ export async function updateNote(uuid: string, data: string) {
 }
 
 export async function getNote(uuid: string) {
-  const note = await prisma.note.findFirst({})
+  const note = await prisma.note.findFirst({
+    where: {
+      id: uuid
+    }
+  })
   if (note == null) return null
 
   return {
