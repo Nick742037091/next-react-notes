@@ -1,4 +1,5 @@
 import { useFormStatus } from 'react-dom'
+import checkmark from '@/assets/icon/checkmark.svg'
 
 export default function SaveButton({ formAction }: { formAction: any }) {
   const { pending } = useFormStatus()
@@ -11,7 +12,7 @@ export default function SaveButton({ formAction }: { formAction: any }) {
       role="menuitem"
     >
       <img
-        src="/checkmark.svg"
+        src={checkmark}
         width="14px"
         height="10px"
         alt=""

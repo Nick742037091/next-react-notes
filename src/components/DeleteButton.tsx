@@ -1,5 +1,5 @@
 import { useFormStatus } from 'react-dom'
-
+import cross from '@/assets/icon/cross.svg'
 export default function DeleteButton({
   isDraft,
   formAction
@@ -17,7 +17,7 @@ export default function DeleteButton({
         role="menuitem"
       >
         <img
-          src="/cross.svg"
+          src={cross}
           width="10px"
           height="10px"
           alt=""

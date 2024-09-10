@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect, useTransition } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
+import chevronDown from '@/assets/icon/chevron-down.svg'
+import chevronUp from '@/assets/icon/chevron-up.svg'
 
 export default function SidebarNoteContent({
   id,
@@ -78,14 +80,9 @@ export default function SidebarNoteContent({
         }}
       >
         {isExpanded ? (
-          <Image
-            src="/chevron-down.svg"
-            width={10}
-            height={10}
-            alt="Collapse"
-          />
+          <Image src={chevronDown} width={10} height={10} alt="Collapse" />
         ) : (
-          <Image src="/chevron-up.svg" width={10} height={10} alt="Expand" />
+          <Image src={chevronUp} width={10} height={10} alt="Expand" />
         )}
       </button>
       {isExpanded && expandedChildren}

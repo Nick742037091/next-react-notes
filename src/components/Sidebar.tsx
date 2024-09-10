@@ -4,6 +4,7 @@ import SidebarNoteList from '@/components/SidebarNoteList'
 import Image from 'next/image'
 import EditButton from '@/components/EditButton'
 import NoteListSkeleton from './NoteListSkeleton'
+import logo from '@/assets/icon/logo.svg'
 
 export default async function Sidebar() {
   return (
@@ -13,7 +14,7 @@ export default async function Sidebar() {
           <section className="sidebar-header">
             <Image
               className="logo"
-              src="/logo.svg"
+              src={logo}
               width={22}
               height={20}
               alt=""
