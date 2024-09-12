@@ -3,6 +3,7 @@
 import prisma, { addNote, updateNote, delNote, addUser } from '@/lib/prisma'
 import { createSession } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 import { z } from 'zod'
 
@@ -74,7 +75,7 @@ export async function deleteNote(prevState: any, formData: FormData) {
     const noteId = formData.get('noteId')
     delNote(noteId as string)
     revalidatePath('/', 'layout')
-    return { message: `删除成功`, errors: [] }
+    redirect('/')
   } catch (error) {
     return { message: ``, errors: [{ message: '删除失败' }] }
   }
