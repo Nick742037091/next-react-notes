@@ -3,18 +3,24 @@
 import { login } from '@/app/actions'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+
 export default function SignIn() {
   const router = useRouter()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleSubmit = async () => {
+    setIsLoading(true)
     const res = await login(username, password)
+    setIsLoading(false)
     if (res.code === 0) {
       router.push('/')
     } else {
       alert(res.message)
     }
   }
+
   return (
     <div className="border-2 border-gray-300 rounded-md p-[20px]">
       <div className="flex mb-[10px]">
@@ -39,8 +45,9 @@ export default function SignIn() {
         <button
           onClick={handleSubmit}
           className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          disabled={isLoading}
         >
-          Sign in
+          {isLoading ? 'Signing in...' : 'Sign in'}
         </button>
       </div>
     </div>

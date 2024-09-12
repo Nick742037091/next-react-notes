@@ -1,7 +1,7 @@
 'use server'
 
 import prisma, { addNote, updateNote, delNote, addUser } from '@/lib/prisma'
-import { createSession } from '@/lib/session'
+import { createSession, deleteSession } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -42,6 +42,11 @@ export async function login(username: string, password: string) {
     data: user,
     code: 0
   }
+}
+
+export async function logout() {
+  await deleteSession()
+  redirect('/')
 }
 
 export async function saveNote(prevState: any, formData: FormData) {
