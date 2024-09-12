@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3000",
-    "build": "next build",
-    "start": "PORT=6001 next start",
+    "dev": "npx prisma generate && next dev --port 3000",
+    "build": "npx prisma generate && npx prisma db push && next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
