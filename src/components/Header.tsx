@@ -1,44 +1,39 @@
-import { signIn, signOut, auth } from '@/auth'
+import { getProfile } from '@/lib/dal'
 import Link from 'next/link'
+import { deleteSession } from '@/lib/session'
+import { redirect } from 'next/navigation'
 
-function SignIn({ provider, ...props }: { provider?: string }) {
+function SignIn() {
   return (
-    <form
-      action={async () => {
-        'use server'
-        await signIn(provider || '')
-      }}
-    >
-      <button {...props}>Sign In</button>
-    </form>
+    <button className="rounded-md bg-blue-500 py-1 px-2 text-white">
+      <Link href="/auth/signin">登录</Link>
+    </button>
   )
 }
 
-function SignOut(props: any) {
+function SignOut(props: { username: string }) {
+  // 服务端组件不能使用onClick，需要使用form的action
   return (
     <form
       action={async () => {
         'use server'
-        await signOut()
+        deleteSession()
+        redirect('/auth/signin')
       }}
     >
-      <button {...props}>Sign Out</button>
+      <span className="mr-2">{props.username}</span>
+      <button className="rounded-md bg-blue-500 py-1 px-2 text-white">
+        退出登录
+      </button>
     </form>
   )
 }
 
 export default async function Header() {
-  const session = await auth()
+  const profile = await getProfile()
   return (
-    <header style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <Link href="/client">Client Side Component</Link>
-      {!session?.user ? (
-        <SignIn />
-      ) : (
-        <span style={{ display: 'flex', alignItems: 'center' }}>
-          {session?.user.name} <SignOut />
-        </span>
-      )}
-    </header>
+    <div className="sticky top bg-white p-2 flex justify-end text-[14px]">
+      {profile ? <SignOut username={profile.username} /> : <SignIn />}
+    </div>
   )
 }

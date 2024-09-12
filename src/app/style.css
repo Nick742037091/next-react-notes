@@ -378,8 +378,8 @@ ul.notes-list {
   transition: visibility 0s linear 0s, opacity 300ms;
 }
 .sidebar-note-toggle-expand img {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
 }
 
 .sidebar-note-excerpt {

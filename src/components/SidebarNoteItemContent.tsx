@@ -80,9 +80,9 @@ export default function SidebarNoteContent({
         }}
       >
         {isExpanded ? (
-          <Image src={chevronDown} width={10} height={10} alt="Collapse" />
+          <Image src={chevronDown} width={20} height={20} alt="Collapse" />
         ) : (
-          <Image src={chevronUp} width={10} height={10} alt="Expand" />
+          <Image src={chevronUp} width={20} height={20} alt="Expand" />
         )}
       </button>
       {isExpanded && expandedChildren}

@@ -1,16 +1,47 @@
 'use server'
 
-import { redirect } from 'next/navigation'
-import { addNote, updateNote, delNote } from '@/lib/prisma'
+import prisma, { addNote, updateNote, delNote, addUser } from '@/lib/prisma'
+import { createSession } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
 
 import { z } from 'zod'
-import { error } from 'console'
 
 const schema = z.object({
   title: z.string().min(1, '请填写标题'),
   content: z.string().min(1, '请填写内容').max(100, '字数最多 100')
 })
+
+export async function login(username: string, password: string) {
+  let user = await prisma.user.findFirst({
+    where: {
+      username: username
+    }
+  })
+  if (!user) {
+    const res = await addUser(username, password)
+    user = {
+      username,
+      password,
+      id: res.id
+    }
+  } else {
+    if (user.password !== password) {
+      return {
+        message: '用户名或密码错误',
+        data: null,
+        code: -1
+      }
+    }
+  }
+
+  await createSession(user.id, user.username)
+
+  return {
+    message: '登录成功',
+    data: user,
+    code: 0
+  }
+}
 
 export async function saveNote(prevState: any, formData: FormData) {
   const noteId = formData.get('noteId')

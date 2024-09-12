@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { auth } from '@/auth'
+import { getProfile } from './dal'
 
 export const prisma = new PrismaClient()
 
@@ -19,12 +19,12 @@ export async function getAllNotes() {
 }
 
 export async function addNote(data: string) {
-  const session = await auth()
+  const profile = await getProfile()
   const result = await prisma.note.create({
     data: {
       title: JSON.parse(data).title,
       content: JSON.parse(data).content,
-      author: { connect: { id: session?.user?.id } }
+      author: { connect: { id: profile?.id } }
     }
   })
 
@@ -80,9 +80,8 @@ export async function addUser(username: string, password: string) {
   })
 
   return {
-    name: username,
     username,
-    userId: user.id
+    id: user.id
   }
 }
 
