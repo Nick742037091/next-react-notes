@@ -46,7 +46,6 @@ export async function login(username: string, password: string) {
 
 export async function logout() {
   await deleteSession()
-  redirect('/')
 }
 
 export async function saveNote(prevState: any, formData: FormData) {

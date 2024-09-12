@@ -3,6 +3,7 @@
 import { login } from '@/app/actions'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { sleep } from '@/lib/utils'
 
 export default function SignIn() {
   const router = useRouter()
@@ -13,10 +14,14 @@ export default function SignIn() {
   const handleSubmit = async () => {
     setIsLoading(true)
     const res = await login(username, password)
-    setIsLoading(false)
+
     if (res.code === 0) {
-      router.push('/')
+      // 等待cookie更新
+      await sleep(100)
+      setIsLoading(false)
+      router.replace('/')
     } else {
+      setIsLoading(false)
       alert(res.message)
     }
   }
