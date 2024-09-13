@@ -3,8 +3,8 @@
 import { logout } from '@/app/actions'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { sleep } from '@/lib/utils'
 import { Button } from './shadcn/button'
+import { MdLogout } from 'react-icons/md'
 
 export default function SignOut(props: { username: string }) {
   // 客户端组件才能使用状态
@@ -20,7 +20,8 @@ export default function SignOut(props: { username: string }) {
   return (
     <div>
       <span className="mr-2">{props.username}</span>
-      <Button color="primary" onClick={handleLogout}>
+      <Button color="primary" onClick={handleLogout} disabled={isLoading}>
+        <MdLogout className="mr-[8px]" />
         {isLoading ? '退出中...' : '退出登录'}
       </Button>
     </div>

@@ -1,5 +1,5 @@
 import { useFormStatus } from 'react-dom'
-import cross from '@/assets/icon/cross.svg'
+import { MdDelete } from 'react-icons/md'
 export default function DeleteButton({
   isDraft,
   formAction
@@ -16,13 +16,7 @@ export default function DeleteButton({
         formAction={formAction}
         role="menuitem"
       >
-        <img
-          src={cross}
-          width="10px"
-          height="10px"
-          alt=""
-          role="presentation"
-        />
+        <MdDelete className="mr-[8px]" />
         Delete
       </button>
     )

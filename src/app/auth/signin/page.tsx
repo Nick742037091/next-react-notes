@@ -11,6 +11,7 @@ import {
   CardTitle
 } from '@/components/shadcn/card'
 import { useError } from '@/lib/utils'
+import { MdLogin } from 'react-icons/md'
 
 export default function SignIn() {
   const [username, setUsername] = useState('')
@@ -54,6 +55,7 @@ export default function SignIn() {
           </div>
           <div className="flex items-center justify-center">
             <Button onClick={handleSubmit} disabled={isLoading}>
+              <MdLogin className="mr-[8px]" />
               {isLoading ? '登录中...' : '登录'}
             </Button>
           </div>

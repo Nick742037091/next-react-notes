@@ -2,9 +2,7 @@
 
 import { useState, useRef, useEffect, useTransition } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import Image from 'next/image'
-import chevronDown from '@/assets/icon/chevron-down.svg'
-import chevronUp from '@/assets/icon/chevron-up.svg'
+import { MdArrowDownward, MdArrowUpward } from 'react-icons/md'
 
 export default function SidebarNoteContent({
   id,
@@ -80,9 +78,9 @@ export default function SidebarNoteContent({
         }}
       >
         {isExpanded ? (
-          <Image src={chevronDown} width={20} height={20} alt="Collapse" />
+          <MdArrowUpward size={24} />
         ) : (
-          <Image src={chevronUp} width={20} height={20} alt="Expand" />
+          <MdArrowDownward size={24} />
         )}
       </button>
       {isExpanded && expandedChildren}

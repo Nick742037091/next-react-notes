@@ -1,6 +1,5 @@
 import { useFormStatus } from 'react-dom'
-import checkmark from '@/assets/icon/checkmark.svg'
-
+import { MdSave } from 'react-icons/md'
 export default function SaveButton({ formAction }: { formAction: any }) {
   const { pending } = useFormStatus()
   return (
@@ -11,13 +10,7 @@ export default function SaveButton({ formAction }: { formAction: any }) {
       disabled={pending}
       role="menuitem"
     >
-      <img
-        src={checkmark}
-        width="14px"
-        height="10px"
-        alt=""
-        role="presentation"
-      />
+      <MdSave className="mr-[8px]" />
       {pending ? 'Saving' : 'Done'}
     </button>
   )

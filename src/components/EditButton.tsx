@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Button } from './shadcn/button'
+import { MdAdd, MdEdit } from 'react-icons/md'
 
 export default function EditButton({
   noteId,
@@ -15,8 +16,8 @@ export default function EditButton({
         className={[
           isDraft ? 'edit-button--solid' : 'edit-button--outline'
         ].join(' ')}
-        role="menuitem"
       >
+        <span className="mr-[6px]">{isDraft ? <MdAdd /> : <MdEdit />}</span>
         {children}
       </Button>
     </Link>
