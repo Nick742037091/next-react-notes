@@ -14,26 +14,14 @@ import {
 } from '@/components/shadcn/card'
 
 export default function SignIn() {
-  const router = useRouter()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [isLogin, setIsLogin] = useState(false)
-
-  // 已登录时显示空页面
-  if (isLogin) return null
 
   const handleSubmit = async () => {
     setIsLoading(true)
     const res = await login(username, password)
-
-    if (res.code === 0) {
-      setIsLogin(true)
-      // 等待cookie更新
-      await sleep(100)
-      setIsLoading(false)
-      router.replace('/')
-    } else {
+    if (res && res.code !== 0) {
       setIsLoading(false)
       alert(res.message)
     }

@@ -2,7 +2,6 @@
 
 import prisma, { addNote, updateNote, delNote, addUser } from '@/lib/prisma'
 import { createSession, deleteSession } from '@/lib/session'
-import { sleep } from '@/lib/utils'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -14,7 +13,6 @@ const schema = z.object({
 })
 
 export async function login(username: string, password: string) {
-  await sleep(1000)
   let user = await prisma.user.findFirst({
     where: {
       username: username
@@ -38,17 +36,12 @@ export async function login(username: string, password: string) {
   }
 
   await createSession(user.id, user.username)
-
-  return {
-    message: '登录成功',
-    data: user,
-    code: 0
-  }
+  redirect('/')
 }
 
 export async function logout() {
-  await sleep(1000)
   await deleteSession()
+  redirect('/')
 }
 
 export async function saveNote(prevState: any, formData: FormData) {

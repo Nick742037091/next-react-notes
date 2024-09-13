@@ -16,7 +16,6 @@ export default function SignOut(props: { username: string }) {
     // 在客户端组件中使用action server，相当于发起请求，可以使用await
     await logout()
     setIsLoading(false)
-    router.push('/')
   }
   return (
     <div>
