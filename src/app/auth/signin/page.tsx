@@ -35,35 +35,37 @@ export default function SignIn() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>登录</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="flex mb-[10px]">
-          <label className="w-[100px]">账号</label>
-          <Input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            type="text"
-            className="p-[5px]"
-          />
-        </div>
-        <div className="flex mb-[10px]">
-          <label className="w-[100px]">密码</label>
-          <Input
-            className="p-[5px]"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-          />
-        </div>
-        <div className="flex items-center justify-center">
-          <Button onClick={handleSubmit} disabled={isLoading}>
-            {isLoading ? '登录中...' : '登录'}
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="h-[100vh] flex items-center justify-center">
+      <Card className="w-[300px]">
+        <CardHeader>
+          <CardTitle>笔记系统</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex mb-[10px]">
+            <label className="w-[100px]">账号</label>
+            <Input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              className="p-[5px]"
+            />
+          </div>
+          <div className="flex mb-[10px]">
+            <label className="w-[100px]">密码</label>
+            <Input
+              className="p-[5px]"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <Button onClick={handleSubmit} disabled={isLoading}>
+              {isLoading ? '登录中...' : '登录'}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

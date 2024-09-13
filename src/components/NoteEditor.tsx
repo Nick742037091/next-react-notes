@@ -6,6 +6,10 @@ import { useFormState } from 'react-dom'
 import { deleteNote, saveNote } from '../app/actions'
 import SaveButton from '@/components/SaveButton'
 import DeleteButton from '@/components/DeleteButton'
+import { Input } from './shadcn/input'
+import { Textarea } from './shadcn/textarea'
+import { Card } from './shadcn/card'
+import { Badge } from './shadcn/badge'
 
 const initialState = {
   message: '',
@@ -37,48 +41,50 @@ export default function NoteEditor({
   }, [saveState])
 
   return (
-    <div className="note-editor">
-      <form className="note-editor-form" autoComplete="off">
-        <div className="note-editor-menu" role="menubar">
+    <Card className="mt-[100px] mb-[40px] mx-[40px] p-[40px] flex-1 flex">
+      <form autoComplete="off">
+        <div className="flex w-[400px]  justify-end">
           <input type="hidden" name="noteId" value={noteId || ''} />
           <SaveButton formAction={saveFormAction} />
           <DeleteButton isDraft={isDraft} formAction={delFormAction} />
         </div>
-        <div className="note-editor-menu">
+        <div className="mt-[8px]">
           {saveState?.message}
           {saveState.errors[0]?.message}
           {delState?.message}
           {delState.errors[0]?.message}
         </div>
-        <label className="offscreen" htmlFor="note-title-input">
-          Enter a title for your note
-        </label>
-        <input
-          id="note-title-input"
-          type="text"
-          name="title"
-          value={title || ''}
-          onChange={(e) => {
-            setTitle(e.target.value)
-          }}
-        />
-        <label className="offscreen" htmlFor="note-body-input">
-          Enter the body for your note
-        </label>
-        <textarea
-          name="body"
-          value={body}
-          id="note-body-input"
-          onChange={(e) => setBody(e.target.value)}
-        />
-      </form>
-      <div className="note-editor-preview">
-        <div className="label label--preview" role="status">
-          Preview
+        <div className="mt-[16px]">
+          <label className="offscreen" htmlFor="note-title-input">
+            Enter a title for your note
+          </label>
+          <Input
+            id="note-title-input"
+            type="text"
+            name="title"
+            value={title || ''}
+            onChange={(e) => {
+              setTitle(e.target.value)
+            }}
+          />
         </div>
-        <h1 className="note-title">{title}</h1>
+        <div className="mt-[16px]">
+          <label className="offscreen" htmlFor="note-body-input">
+            Enter the body for your note
+          </label>
+          <Textarea
+            name="body"
+            value={body}
+            id="note-body-input"
+            onChange={(e) => setBody(e.target.value)}
+          />
+        </div>
+      </form>
+      <div className="flex-1 ml-[40px] border-l-[1px] border-gray-300 pl-[40px]">
+        <Badge className="text-[20px]">Preview</Badge>
+        <h1 className="text-[20px] mt-[40px]">{title}</h1>
         <NotePreview>{body}</NotePreview>
       </div>
-    </div>
+    </Card>
   )
 }

@@ -9,19 +9,19 @@ export default async function EditPage({ params }: { params: { id: string } }) {
 
   if (note === null) {
     return (
-      <div className="note--empty-state">
-        <span className="note-text--empty-state">
-          Click a note on the left to view something! 🥺
-        </span>
+      <div className="p-[20px] text-[28px]">
+        Click a note on the left to view something! 🥺
       </div>
     )
   }
 
   return (
-    <NoteEditor
-      noteId={noteId}
-      initialTitle={note.title}
-      initialBody={note.content}
-    />
+    <div className="h-full flex flex-col">
+      <NoteEditor
+        noteId={noteId}
+        initialTitle={note.title}
+        initialBody={note.content}
+      />
+    </div>
   )
 }

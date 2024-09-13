@@ -2,21 +2,21 @@ import './style.css'
 import './globals.css'
 import Sidebar from '@/components/Sidebar'
 import Header from '@/components/Header'
+import { getProfile } from '@/lib/dal'
 
 export default async function RootLayout({
   children
 }: {
   children: React.ReactNode
 }) {
+  const profile = await getProfile()
   return (
     <html lang="en">
-      <body>
-        <div className="main flex">
-          <Sidebar />
-          <section className="flex-1 flex flex-col">
-            <Header />
-            <div className="flex-1 note-viewer">{children}</div>
-          </section>
+      <body className="h-[100vh] flex flex-col relative">
+        {profile ? <Header /> : null}
+        <div className="flex-1 flex ">
+          {profile ? <Sidebar /> : null}
+          <div className="flex-1">{children}</div>
         </div>
       </body>
     </html>
