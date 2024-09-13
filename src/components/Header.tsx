@@ -1,12 +1,13 @@
 import { getProfile } from '@/lib/dal'
 import Link from 'next/link'
 import SignOut from './Logout'
+import { Button } from './shadcn/button'
 
 function SignIn() {
   return (
-    <button className="rounded-md bg-blue-500 py-1 px-2 text-white">
+    <Button>
       <Link href="/auth/signin">登录</Link>
-    </button>
+    </Button>
   )
 }
 

@@ -4,6 +4,7 @@ import { logout } from '@/app/actions'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { sleep } from '@/lib/utils'
+import { Button } from './shadcn/button'
 
 export default function SignOut(props: { username: string }) {
   const router = useRouter()
@@ -22,12 +23,9 @@ export default function SignOut(props: { username: string }) {
   return (
     <div>
       <span className="mr-2">{props.username}</span>
-      <button
-        className="rounded-md bg-blue-500 py-1 px-2 text-white"
-        onClick={handleLogout}
-      >
+      <Button color="primary" onClick={handleLogout}>
         {isLoading ? '退出中...' : '退出登录'}
-      </button>
+      </Button>
     </div>
   )
 }
