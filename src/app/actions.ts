@@ -80,3 +80,16 @@ export async function deleteNote(prevState: any, formData: FormData) {
     return { message: ``, errors: [{ message: '删除失败' }] }
   }
 }
+
+export async function getNotesByPage(page: number, pageSize: number = 10) {
+  // 相当于作为接口层，是否将数据库查询放到另外一个service层
+  const notes = await prisma.note.findMany({
+    skip: (page - 1) * pageSize,
+    take: pageSize
+  })
+  const count = await prisma.note.count()
+  return {
+    list: notes,
+    count
+  }
+}
