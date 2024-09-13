@@ -10,8 +10,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/shadcn/card'
-import { useToast } from '@/hooks/use-toast'
-import { cn, useError } from '@/lib/utils'
+import { useError } from '@/lib/utils'
 
 export default function SignIn() {
   const [username, setUsername] = useState('')
