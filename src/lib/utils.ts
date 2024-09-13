@@ -12,8 +12,13 @@ export const useError = () => {
   const { toast } = useToast()
   return (options: Parameters<typeof toast>[0]) =>
     toast({
-      // className: cn('flex fixed max-w-[200px] top-[8px] right-[8px]'),
-      duration: 2000,
+      style: {
+        bottom: '8px',
+        right: '8px',
+        position: 'fixed',
+        width: 'auto'
+      },
+      duration: 3000,
       ...options,
       variant: 'destructive'
     })

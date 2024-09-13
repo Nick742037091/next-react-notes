@@ -23,7 +23,7 @@ export default function SignIn() {
     const res = await login(username, password)
     if (res && res.code !== 0) {
       setIsLoading(false)
-      error({ description: '登录失败' })
+      error({ description: res.message })
     }
   }
 
