@@ -2,8 +2,6 @@
 
 import { login } from '@/app/actions'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { sleep } from '@/lib/utils'
 import { Button } from '@/components/shadcn/button'
 import { Input } from '@/components/shadcn/input'
 import {
@@ -12,18 +10,21 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/shadcn/card'
+import { useToast } from '@/hooks/use-toast'
+import { cn, useError } from '@/lib/utils'
 
 export default function SignIn() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const error = useError()
 
   const handleSubmit = async () => {
     setIsLoading(true)
     const res = await login(username, password)
     if (res && res.code !== 0) {
       setIsLoading(false)
-      alert(res.message)
+      error({ description: res.message })
     }
   }
 

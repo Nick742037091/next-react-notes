@@ -3,6 +3,7 @@ import './globals.css'
 import Sidebar from '@/components/Sidebar'
 import Header from '@/components/Header'
 import { getProfile } from '@/lib/dal'
+import { Toaster } from '@/components/shadcn/toaster'
 
 export default async function RootLayout({
   children
@@ -18,6 +19,7 @@ export default async function RootLayout({
           {profile ? <Sidebar /> : null}
           <div className="flex-1">{children}</div>
         </div>
+        <Toaster />
       </body>
     </html>
   )
