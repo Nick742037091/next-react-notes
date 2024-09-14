@@ -1,7 +1,7 @@
 import SidebarNoteItem from '@/components/SidebarNoteItem'
 import { Note } from '@prisma/client'
 
-export default async function NoteList({ list }: { list: Note[] }) {
+export default function NoteList({ list }: { list: Note[] }) {
   if (list.length == 0) {
     return <div className="notes-empty">{'No notes created yet!'}</div>
   }

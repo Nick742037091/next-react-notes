@@ -4,6 +4,15 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     cpus: 8
+  },
+  redirects: async () => {
+    return [
+      {
+        source: '/',
+        destination: '/note',
+        permanent: true
+      }
+    ]
   }
 }
 

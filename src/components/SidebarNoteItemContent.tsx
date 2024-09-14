@@ -4,6 +4,13 @@ import { useState, useRef, useEffect, useTransition } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md'
 
+export const getQueryPage = () => {
+  const currentQuery = new URLSearchParams(window.location.search)
+  const page = currentQuery.get('page')
+  const queryString = page ? `?page=${page}` : ''
+  return queryString
+}
+
 export default function SidebarNoteContent({
   id,
   title,
@@ -34,6 +41,16 @@ export default function SidebarNoteContent({
     }
   }, [title])
 
+  const handleOpenNote = () => {
+    const sidebarToggle = document.getElementById(
+      'sidebar-toggle'
+    ) as HTMLInputElement | null
+    if (sidebarToggle) {
+      sidebarToggle.checked = true
+    }
+    router.push(`/note/${id}${getQueryPage()}`)
+  }
+
   return (
     <div
       ref={itemRef}
@@ -58,15 +75,7 @@ export default function SidebarNoteContent({
             ? '1px solid var(--primary-border)'
             : '1px solid transparent'
         }}
-        onClick={() => {
-          const sidebarToggle = document.getElementById(
-            'sidebar-toggle'
-          ) as HTMLInputElement | null
-          if (sidebarToggle) {
-            sidebarToggle.checked = true
-          }
-          router.push(`/note/${id}`)
-        }}
+        onClick={handleOpenNote}
       >
         Open note for preview
       </button>
