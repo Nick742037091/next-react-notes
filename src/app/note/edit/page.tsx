@@ -1,5 +1,14 @@
 import NoteEditor from '@/components/NoteEditor'
-
-export default async function EditPage() {
-  return <NoteEditor noteId={null} initialTitle="Untitled" initialBody="" />
+import SideBarWrapper from '@/components/SideBarWrapper'
+export default async function EditPage({
+  searchParams
+}: {
+  searchParams: { page: string }
+}) {
+  const page = parseInt(searchParams.page) || 1
+  return (
+    <SideBarWrapper page={page} pagePath={`/note/edit`}>
+      <NoteEditor noteId={null} initialTitle="Untitled" initialBody="" />
+    </SideBarWrapper>
+  )
 }

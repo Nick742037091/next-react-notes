@@ -5,7 +5,10 @@ import { useRouter, usePathname } from 'next/navigation'
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md'
 
 export const getQueryPage = () => {
-  const currentQuery = new URLSearchParams(window.location.search)
+  const currentQuery =
+    typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search)
+      : new URLSearchParams()
   const page = currentQuery.get('page')
   const queryString = page ? `?page=${page}` : ''
   return queryString
