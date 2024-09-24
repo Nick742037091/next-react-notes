@@ -27,7 +27,7 @@ export default function SidebarNoteContent({
 }) {
   const router = useRouter()
   const pathname = usePathname()
-  const selectedId = pathname?.split('/')[1] || null
+  const selectedId = pathname?.split('/')[2] || null
 
   const [isPending] = useTransition()
   const [isExpanded, setIsExpanded] = useState(false)

@@ -54,9 +54,7 @@ export default function NoteEditor({
           <DeleteButton isDraft={isDraft} formAction={delFormAction} />
         </div>
         <div className="mt-[8px]">
-          {saveState?.message}
           {saveState.errors[0]?.message}
-          {delState?.message}
           {delState.errors[0]?.message}
         </div>
         <div className="mt-[16px]">
