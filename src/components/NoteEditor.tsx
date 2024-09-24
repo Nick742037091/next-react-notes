@@ -10,8 +10,6 @@ import { Input } from './shadcn/input'
 import { Textarea } from './shadcn/textarea'
 import { Card } from './shadcn/card'
 import { Badge } from './shadcn/badge'
-import eventBus from '@/lib/events/eventBus'
-import { EVENT_UPDATE_NODE_LIST } from '@/lib/events'
 
 const initialState = {
   message: '',
@@ -39,15 +37,11 @@ export default function NoteEditor({
     if (saveState.errors.length) {
       // 处理错误
       console.log(saveState.errors)
-    } else {
-      eventBus.emit(EVENT_UPDATE_NODE_LIST)
     }
   }, [saveState])
   useEffect(() => {
     if (delState.errors.length) {
       console.log(delState.errors)
-    } else {
-      eventBus.emit(EVENT_UPDATE_NODE_LIST)
     }
   }, [delState])
 
